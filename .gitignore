@@ -1,1 +1,7 @@
 *.class
+build
+*.war
+*.jar
+.idea
+.gradle
+

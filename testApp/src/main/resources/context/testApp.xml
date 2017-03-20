@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:property-placeholder properties-ref="appProperties"/>
+
+    <mvc:annotation-driven/>
+
+    <bean id="appProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="singleton" value="true"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:default.properties</value>
+            </list>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="TestProperty">10</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <context:component-scan base-package="ru.zaryatech.study"/>
+
+   <!-- <context:component-scan base-package="ru.pvdnp.services.common"/>
+-->
+    <!-- Configure to plugin JSON as request and response in method handler -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonMessageConverter"/>
+                <ref bean="byteArrayMessageConverter"/>
+                <ref bean="plainTextConverter"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="byteArrayMessageConverter" class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <util:constant static-field="org.springframework.http.MediaType.APPLICATION_OCTET_STREAM_VALUE"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Configure bean to convert JSON to POJO and vice versa -->
+    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="prefixJson" value="false"/>
+        <property name="supportedMediaTypes">
+            <list>
+                <util:constant static-field="org.springframework.http.MediaType.APPLICATION_JSON"/>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="plainTextConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <util:constant static-field="org.springframework.http.MediaType.TEXT_PLAIN_VALUE"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>

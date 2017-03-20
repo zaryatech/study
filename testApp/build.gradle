@@ -1,0 +1,37 @@
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'maven'
+
+version = '1.0'
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+apply plugin: 'war'
+war.archiveName = name+'.war'
+
+
+group='ru.zaryatech.services'
+
+
+dependencies {
+	// Общие библиотеки
+	runtime 'org.slf4j:slf4j-log4j12:1.7.10'
+	compile 'org.slf4j:slf4j-api:1.7.10'
+	compile 'org.springframework:spring-context:4.3.0.RELEASE'
+	compile 'org.springframework:spring-web:4.3.0.RELEASE'
+	compile 'org.springframework:spring-webmvc:4.3.0.RELEASE'
+	compile 'org.springframework:spring-jdbc:4.3.0.RELEASE'
+	runtime 'org.springframework:spring-aop:4.3.0.RELEASE'
+	compile 'org.springframework:spring-jms:4.3.0.RELEASE'
+	runtime 'aopalliance:aopalliance:1.0'
+	runtime 'org.aspectj:aspectjrt:1.8.5'
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.5.1'
+	compile 'com.fasterxml.jackson.core:jackson-annotations:2.5.1'
+	compile 'javax.inject:javax.inject:1'
+}
+
+
+
