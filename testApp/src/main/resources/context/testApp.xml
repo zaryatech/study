@@ -10,6 +10,8 @@
                 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
                 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
+    <import resource="./jpa.xml"/>
+
     <context:property-placeholder properties-ref="appProperties"/>
 
     <mvc:annotation-driven/>
@@ -24,7 +26,9 @@
         </property>
         <property name="properties">
             <props>
-                <prop key="TestProperty">10</prop>
+                <prop key="jdbc.hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</prop>
+                <prop key="jdbc.hibernate.hbm2ddl.auto">validate</prop>
+                <prop key="jdbc.hibernate.default_schema">public</prop>
             </props>
         </property>
     </bean>

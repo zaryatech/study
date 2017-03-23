@@ -24,8 +24,17 @@ dependencies {
 	compile 'org.springframework:spring-web:4.3.0.RELEASE'
 	compile 'org.springframework:spring-webmvc:4.3.0.RELEASE'
 	compile 'org.springframework:spring-jdbc:4.3.0.RELEASE'
+	compile 'org.springframework:spring-orm:4.3.0.RELEASE'
 	runtime 'org.springframework:spring-aop:4.3.0.RELEASE'
-	compile 'org.springframework:spring-jms:4.3.0.RELEASE'
+
+
+	// TODO поднять версию hibernate
+	runtime 'org.hibernate:hibernate-core:5.1.0.Final'
+	runtime 'org.hibernate:hibernate-entitymanager:5.1.0.Final'
+	compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
+	runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
+
+	runtime ( group: 'com.mchange', name: 'c3p0', version: '0.9.5.2')
 	runtime 'aopalliance:aopalliance:1.0'
 	runtime 'org.aspectj:aspectjrt:1.8.5'
 	compile 'com.fasterxml.jackson.core:jackson-databind:2.5.1'
