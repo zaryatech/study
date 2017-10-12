@@ -2,6 +2,7 @@ package ru.zaryatech.study;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +25,19 @@ public class TestService {
     @PersistenceContext
     private EntityManager em;
 
+
+
     @ResponseBody
     @RequestMapping(value = "/hello", method= RequestMethod.POST)
     public String hello(@RequestBody String hello) {
         logger.debug("hello {} {}",hello, value);
+        helloPersist(hello);
         return "hello from server " + hello;
     }
+
+
+    @Autowired
+    TestService self;
 
 
     // означает что метод в транзакции
